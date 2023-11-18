@@ -2,7 +2,7 @@ import os
 import sys
 import click
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy 
 
 WIN = sys.platform.startswith('win')
@@ -53,7 +53,7 @@ def forge():
     """Generate fake data."""
     db.create_all()
     # 全局的两个变量移动到这个函数内
-    name = 'Grey Li'
+    name = 'Amber'
     movies = [
         {'title': 'My Neighbor Totoro', 'year': '1988'},
         {'title': 'Dead Poets Society', 'year': '1989'},
@@ -74,10 +74,16 @@ def forge():
     db.session.commit()
     click.echo('Done.')
 
+@app.context_processor
+def inject_user():
+    user = User.query.first()
+    return dict(current_user=user)
 
-#index 视图
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 @app.route('/')
 def index():
-    user = User.query.first() # 读取用户记录
-    movies = Movie.query.all() # 读取所有电影记录
-    return render_template('index.html', user=user, movies=movies)
+    movies = Movie.query.all()
+    return render_template('index.html', movies=movies)
