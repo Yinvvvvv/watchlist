@@ -77,7 +77,7 @@ def forge():
 @app.context_processor
 def inject_user():
     user = User.query.first()
-    return dict(current_user=user)
+    return dict(user=user)
 
 @app.errorhandler(404)
 def page_not_found(e):
