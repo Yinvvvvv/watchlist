@@ -5,17 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-s
     cale=1.0">
-    <title>{{ user.name }}Amber's Watchlist</title>
+    <title>{{ user.name }}'s Watchlist</title>
     <link rel="icon" href="{{ url_for('static', filename='myicon.png') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='
-    style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
     {% endblock %}
 </head>
 <body>
     <h2>
-        <img alt="Loopy" class="loopy" src="{{ url_for('static
-        ', filename='images/loopy2.jpeg') }}">
-        {{ user.name }} Amber's Watchlist
+        <img alt="Loopy" class="loopy" src="{{ url_for('static', filename='images/loopy2.jpeg') }}">
+        {{ user.name }} 's Watchlist
     </h2>
     <nav>
         <ul>
